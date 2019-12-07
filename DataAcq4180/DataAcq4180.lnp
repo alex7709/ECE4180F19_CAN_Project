@@ -1,0 +1,28 @@
+--cpu Cortex-M0
+"dataacq4180\startup_stm32f042x6.o"
+"dataacq4180\main.o"
+"dataacq4180\stm32f0xx_it.o"
+"dataacq4180\stm32f0xx_hal_msp.o"
+"dataacq4180\nau7802_lib.o"
+"dataacq4180\stm32f0xx_hal_adc.o"
+"dataacq4180\stm32f0xx_hal_adc_ex.o"
+"dataacq4180\stm32f0xx_hal_can.o"
+"dataacq4180\stm32f0xx_hal_i2c.o"
+"dataacq4180\stm32f0xx_hal_i2c_ex.o"
+"dataacq4180\stm32f0xx_hal_tim.o"
+"dataacq4180\stm32f0xx_hal_tim_ex.o"
+"dataacq4180\stm32f0xx_hal_rcc.o"
+"dataacq4180\stm32f0xx_hal_rcc_ex.o"
+"dataacq4180\stm32f0xx_hal.o"
+"dataacq4180\stm32f0xx_hal_gpio.o"
+"dataacq4180\stm32f0xx_hal_dma.o"
+"dataacq4180\stm32f0xx_hal_cortex.o"
+"dataacq4180\stm32f0xx_hal_pwr.o"
+"dataacq4180\stm32f0xx_hal_pwr_ex.o"
+"dataacq4180\stm32f0xx_hal_flash.o"
+"dataacq4180\stm32f0xx_hal_flash_ex.o"
+"dataacq4180\system_stm32f0xx.o"
+--library_type=microlib --strict --scatter "DataAcq4180\DataAcq4180.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list "DataAcq4180.map" -o DataAcq4180\DataAcq4180.axf
