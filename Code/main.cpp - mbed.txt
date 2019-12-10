@@ -1,0 +1,49 @@
+#include "mbed.h"
+
+DigitalOut led1(LED1);
+DigitalOut led2(LED2);
+DigitalOut led4(LED4);
+CAN can1(p9, p10);
+CAN can2(p30, p29);
+Serial pc(USBTX, USBRX); // tx, rx
+
+
+unsigned int volatile id=0xAA;//message id for address 0. Default and initial
+unsigned int volatile mask=0xFF;
+CANFormat volatile format = CANStandard;
+int arrived;
+
+
+int main()
+{
+    pc.printf("Beginning CAN Read\n");
+    can2.frequency(1e6);
+    can2.mode(CAN::Normal);
+    CANMessage msg;
+    while(1) {
+        //char data[3] = {0xAA, 0xAA, 0xAA};
+//        if(can1.write(CANMessage(0xFF, data, 3))) {
+//            printf("Message sent\n");
+//        } 
+        arrived = can2.read(msg);//dont forget handle when redoing
+//        pc.printf("Message Arrived: %d\n",arrived);
+        if(arrived) {
+            //pc.printf("Message Byte 1: %d\n", msg.data[0]);
+//            pc.printf("Message Byte 2: %d\n", msg.data[1]);
+//            pc.printf("Message Byte 3: %d\n", msg.data[2]);
+            int result; int result2; float resultf; uint8_t temp;
+            result = msg.data[0];
+            result = result << 8;
+            result |= msg.data[1];
+            result = result <<8;
+            result |= msg.data[2];
+            result2 = result <<8;
+            result2 = result2>>8;
+            resultf = ((float)result2/(float)0x007FFFFF) *1.65f;
+            pc.printf("IT WORKS! Float Val = %f\n", resultf);
+            led2 = !led2;
+        }
+        led4 = !led4;
+        wait(0.1);
+    }
+}
